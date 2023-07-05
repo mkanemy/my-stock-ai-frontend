@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test-coverage": "react-scripts test --coverage --transformIgnorePatterns \"node_modules/(?!axios)/\""
   },
   "eslintConfig": {
     "extends": [
