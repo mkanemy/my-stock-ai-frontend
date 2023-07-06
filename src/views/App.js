@@ -14,7 +14,7 @@ function App() {
       })
       .catch(error => {
         setResponse("error");
-        console.error(error ? error : "Error");
+        console.error(error);
       });
   }, []);
 
