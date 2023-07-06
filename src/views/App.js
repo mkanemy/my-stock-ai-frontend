@@ -13,7 +13,8 @@ function App() {
         setResponse(res.data);
       })
       .catch(error => {
-        console.error(error);
+        setResponse("error");
+        console.error(error ? error : "Error");
       });
   }, []);
 
