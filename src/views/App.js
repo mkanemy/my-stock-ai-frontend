@@ -8,7 +8,7 @@ function App() {
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL)
+    axios.get(process.env.REACT_APP_BACKEND_URL + "root")
       .then(res => {
         setResponse(res.data);
       })
