@@ -4,8 +4,9 @@ describe('template spec', () => {
       statusCode: 200,
       body: ["were here!"],
     }).as("root")
-
-    cy.visit('localhost:3000');
-    cy.contains('were here!');
+    .then(() => {
+      cy.visit('localhost:3000');
+      cy.contains('were here!');
+    })
   })
 })
