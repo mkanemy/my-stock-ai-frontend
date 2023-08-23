@@ -1,16 +1,11 @@
 describe('template spec', () => {
-  beforeEach(() => {
+  it('passes', () => {
     cy.intercept('/root', {
       statusCode: 200,
       data: ["were here!"],
     }).as("root")
-    
-    cy.intercept({pathname: '**/+page.svelte*'}).as('svelte')
-    cy.visit('localhost:3000');
-    cy.wait('@svelte')
-  })
 
-  it('passes', () => {    
+    cy.visit('localhost:3000');
     cy.contains('were here!');
   })
 })
