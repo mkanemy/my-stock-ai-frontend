@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "vercel env pull .env && react-scripts start",
-    "start-cypress": "REACT_APP_BACKEND_URL=http://localhost:8000/ && HTTP_PROXY=http://localhost:8000/ && react-scripts start",
+    "start-cypress": "REACT_APP_BACKEND_URL=https://my-stock-ai-backend.vercel.app/ && HTTP_PROXY=https://my-stock-ai-backend.vercel.app/ && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
