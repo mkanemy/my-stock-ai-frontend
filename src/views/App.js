@@ -8,7 +8,7 @@ function App() {
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/')
+    axios.get(process.env.REACT_APP_BACKEND_URL)
       .then(res => {
         setResponse(res.data);
       })
