@@ -6,17 +6,15 @@ import axios from 'axios';
 function App() {
 
   const [response, setResponse] = useState([]);
-
-  useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + "root")
-      .then(res => {
-        setResponse(res.data);
-      })
-      .catch(error => {
-        setResponse("error");
-        console.error(error);
-      });
-  }, []);
+  
+  axios.get(process.env.REACT_APP_BACKEND_URL + "root")
+    .then(res => {
+      setResponse(res.data);
+    })
+    .catch(error => {
+      setResponse("error");
+      console.error(error);
+    });
 
   return (
     <div className="App">
