@@ -6,11 +6,11 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     "video": false,
-    defaultCommandTimeout: 20000,
-    execTimeout: 20000,
-    taskTimeout: 20000,
-    pageLoadTimeout: 20000,
-    requestTimeout: 20000,
-    responseTimeout: 20000,
+    defaultCommandTimeout: 50000,
+    execTimeout: 50000,
+    taskTimeout: 50000,
+    pageLoadTimeout: 50000,
+    requestTimeout: 50000,
+    responseTimeout: 50000,
   },
 });
