@@ -1,20 +1,22 @@
 import logo from '../misc/logo.svg';
 import '../styles/App.css';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 
 function App() {
 
   const [response, setResponse] = useState([]);
-  
-  axios.get(process.env.REACT_APP_BACKEND_URL + "root")
-    .then(res => {
-      setResponse(res.data);
-    })
-    .catch(error => {
-      setResponse("error");
-      console.error(error);
-    });
+
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_BACKEND_URL + "root")
+      .then(res => {
+        setResponse(res.data);
+      })
+      .catch(error => {
+        setResponse("error");
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div className="App">

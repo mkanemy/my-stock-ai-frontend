@@ -6,6 +6,7 @@ describe('template spec', () => {
     }).as("root")
     
     cy.visit('localhost:3000');
+    cy.contains('Learn React')
     cy.wait("@root").then(() => {
       cy.contains('were here!');
     })
