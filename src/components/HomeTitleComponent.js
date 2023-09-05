@@ -6,7 +6,7 @@ function HomeTitleComponent() {
     return (
         <div className="HomeTitleComponent">
             My Stock AI Analyzer
-        </div>
+        </div> 
     );
 }
 
