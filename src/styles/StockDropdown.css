@@ -1,0 +1,17 @@
+.StockSelectForm {
+    background-color: #282c34;
+}
+
+.StockSelectForm .MuiAutocomplete-root {
+    margin: 25px auto;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.stockSelectBtn {
+    width: 150px;
+}
+
+.StockSelectForm .MuiInputLabel-shrink {
+    font-weight: bold;
+}

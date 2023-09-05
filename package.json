@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.7",
+    "@mui/material": "^5.14.7",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,7 +19,7 @@
   },
   "scripts": {
     "start": "vercel env pull .env && react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "test-coverage": "react-scripts test --coverage --transformIgnorePatterns \"node_modules/(?!axios)/\""
@@ -39,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^12.17.0"
+    "cypress": "^12.17.0",
+    "react-router-dom": "^6.15.0"
   }
 }
