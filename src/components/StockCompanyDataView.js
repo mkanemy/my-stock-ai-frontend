@@ -28,19 +28,19 @@ function StockCompanyDataView(stock) {
             });
     }, []);
 
-    let stockCompanyDataView = (
-        <div className="NoDataResponse">
-            <h2>No company data available for {stock.stock}</h2>
-        </div>
-    )
+    if (!quoteData?.c) {
+        return (<div></div>);
+    }
 
+    var stockCompanyDataView = (
+    <div className="NoDataResponse"></div>);
 
     if (companyData?.name) {
         stockCompanyDataView = (
             <div className="StockCompanyDataView">
                 <div className="StockTitle">
                     <div className="StockTitleImgWrapper">
-                        <img src={companyData?.logo} className="StockTitleImg"/>
+                        <img src={companyData?.logo} alt="No Photo Available" className="StockTitleImg"/>
                     </div>
                     <div className="StockTitleText">
                         <a className="StockTitleLink" href={companyData?.weburl} target="_blank">{companyData?.name} <ArrowForwardIosIcon /></a>
@@ -53,35 +53,46 @@ function StockCompanyDataView(stock) {
                 </div>
             </div>
         ) 
+    } else {
+        stockCompanyDataView = (
+            <div className="NoDataResponse">
+                <h2>No company data available for {stock.stock}</h2>
+            </div>
+        )
     }
 
-    let stockQuoteDataView = (
+    var stockQuoteDataView = (
         <div className="NoDataResponse">
-            <h2>No quote data available for {stock.stock}</h2>
         </div>
     )
 
-    let stockChange = 
-    quoteData?.d > 0 ? (
-    <h2 className="stockChangeDiv stockChangePositive">+{quoteData?.d} ({quoteData?.dp}%)</h2>
-    ) : (
-    <h2 className="stockChangeDiv stockChangeNegative">{quoteData?.d} ({quoteData?.dp}%)</h2>)
-
     if (quoteData?.c) {
+        let stockChange = 
+        quoteData?.d > 0 ? (
+        <h2 className="stockChangeDiv stockChangePositive">+{quoteData?.d} ({quoteData?.dp}%)</h2>
+        ) : (
+        <h2 className="stockChangeDiv stockChangeNegative">{quoteData?.d} ({quoteData?.dp}%)</h2>)
+
         stockQuoteDataView = (
             <div className="stockQuoteDataView">
                 <h1>{quoteData?.c} USD</h1>
                 {stockChange}
             </div>
         )
+    } else {
+        stockQuoteDataView = (
+            <div className="NoDataResponse">
+                <h2>No quote data available for {stock.stock}</h2>
+            </div>
+        )
     }
 
-    let stockAdditionalDataView = (
+    var stockAdditionalDataView = (
         <div className="StockAdditionalDataView">
         </div>
     )
 
-    if (financialMetrics?.marketCapitalization && quoteData?.c) {
+    if (quoteData?.c) {
         stockAdditionalDataView = (
             <div className="StockAdditionalDataView">
                 <div className="StockAdditionalDataRow">
@@ -98,24 +109,19 @@ function StockCompanyDataView(stock) {
                         <h3>Market Cap </h3><h4>{formatMarketCap(financialMetrics?.marketCapitalization)}</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
-                        <h3>Div Yield </h3><h4>{Math.trunc(financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100}%</h4>
+                        <h3>Div Yield </h3><h4>{Math.round(financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100}%</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
                         <h3>52 Week Range </h3><h4>{financialMetrics['52WeekHigh']}-{financialMetrics['52WeekLow']}</h4>
                     </div>
-                </div>
-                <div className="StockAdditionalDataRow">
                     <div className="StockAdditionalDataComponent">
-                        <h3>Beta </h3><h4>{Math.trunc(financialMetrics?.beta * 100)/100}</h4>
+                        <h3>Beta </h3><h4>{Math.round(financialMetrics?.beta * 100)/100}</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
-                        <h3>Low </h3><h4>{quoteData?.l}</h4>
+                        <h3>EPS </h3><h4>{Math.round(financialMetrics?.epsTTM * 100) / 100}</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
-                        <h3>Market Cap </h3><h4>{formatMarketCap(financialMetrics?.marketCapitalization)}</h4>
-                    </div>
-                    <div className="StockAdditionalDataComponent">
-                        <h3>Div Yield </h3><h4>{Math.trunc(financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100}%</h4>
+                        <h3>PE </h3><h4>{Math.round(quoteData?.c / financialMetrics?.epsTTM * 100) / 100}</h4>
                     </div>
                 </div>
             </div>)
