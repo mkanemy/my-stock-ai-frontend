@@ -84,9 +84,7 @@ function StockDropdown() {
                     if (!inputValue || inputValue === '') {
                         alert('Please Select a Stock to Analyze')
                     } else {
-                        let symbol = inputValue.substring(0, inputValue.indexOf(":") - 1);
-                        console.log(symbol)
-                        navigate('/stock', { state: { stock: symbol } })
+                        navigate('/stock', { state: { stock: inputValue } })
                     }
                 }}>
                 Analyze
