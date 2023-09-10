@@ -78,9 +78,10 @@
 }
 
 .StockDataChart {
-    width: 80vw;
+    width: -webkit-calc(100% - 65px);
     height: 30vh;
     margin-left: 25px;
+    margin-top: 20px;
 }
 
 .StockAdditionalDataView {
@@ -107,4 +108,52 @@
 
 .NoDataResponse {
     margin-left: 25px;
+    margin-bottom: 10px;
+}
+
+.NewsArticleWrapper {
+    margin-left: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: -webkit-calc(100% - 50px);
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.NewsArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: -webkit-calc(20% - 17px);
+    background-color: #282c34 !important;
+    color: white !important;
+    border-color: lightgray !important;
+}
+
+.NewsArticle .articleDescription {
+    font-size: 10px;
+    color: lightgray;
+    margin-top: 7px;
+}
+
+.NewsArticle a {
+    text-decoration: none;
+    color: #61dafb;
+}
+
+.NewsArticle .articleLink {
+    margin-top: auto;
+}
+
+.NewsArticle .articleTitle {
+    font-size: 12px;
+}
+
+.NewsArticleWrapTitle {
+    margin-left: 25px;
+    margin-top: 50px;
 }
