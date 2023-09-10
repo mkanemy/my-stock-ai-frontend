@@ -11,7 +11,7 @@ function StockAdditionalDataView(financialMetrics, quoteData) {
         </div>
     )
 
-    if (financialMetrics?.marketCapitalization && quoteData?.c) {
+    if (financialMetrics && quoteData) {
         stockAdditionalDataView = (
             <div className="StockAdditionalDataView">
                 <div className="StockAdditionalDataRow">
