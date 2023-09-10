@@ -35,7 +35,7 @@ function StockCompanyDataView(stock) {
                 console.error(error);
             });
 
-        axios.get(process.env.REACT_APP_BACKEND_URL + 'stock/articles', { params: { ticker: stock.replace(/ :/g, '') } })
+        axios.get(process.env.REACT_APP_BACKEND_URL + 'stock/articles', { params: { ticker: ticker } })
             .then(res => {
                 setNewsArticles(res.data.data);
                 setNewsUrls(res.data.urls);

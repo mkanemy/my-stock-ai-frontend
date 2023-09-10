@@ -146,6 +146,8 @@
 
 .NewsArticle .articleLink {
     margin-top: auto;
+    margin-left: 8px;
+    padding-top: 0;
 }
 
 .NewsArticle .articleTitle {
