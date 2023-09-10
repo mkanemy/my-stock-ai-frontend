@@ -10,8 +10,6 @@ function NewsArticle(article) {
 
     article = article.article;
 
-    console.log(article);
-
     return (
         <Card variant="outlined" className="NewsArticle">
             <CardContent>
