@@ -13,7 +13,7 @@ function StockNewsArticles(newsArticles) {
         newsArticles.forEach((item, index, arr) => {
             stockNewsArticlesView.push(<NewsArticle article={item}/>)
         })
-    } else {
+    } else if (newsArticles) {
         stockNewsArticlesView = (
             <div className="NoDataResponse">
                 No News Articles Found for {stock.stock}

@@ -29,7 +29,7 @@ function StockCompanyInfo(companyData) {
                 </div>
             </div>
         ) 
-    } else {
+    } else if (companyData) {
         stockCompanyDataView = (
             <div className="NoDataResponse">
                 <h2>No company data available for {stock.stock}</h2>

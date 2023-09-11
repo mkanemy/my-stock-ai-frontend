@@ -28,24 +28,19 @@ function StockAdditionalDataView(financialMetrics, quoteData) {
                         <h3>Market Cap </h3><h4>{formatMarketCap(financialMetrics?.marketCapitalization)}</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
-                        <h3>Div Yield </h3><h4>{Math.trunc(financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100}%</h4>
+                        <h3>Div Yield </h3><h4>{Math.round(financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100}%</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
                         <h3>52 Week Range </h3><h4>{financialMetrics['52WeekHigh']}-{financialMetrics['52WeekLow']}</h4>
                     </div>
-                </div>
-                <div className="StockAdditionalDataRow">
                     <div className="StockAdditionalDataComponent">
                         <h3>Beta </h3><h4>{Math.trunc(financialMetrics?.beta * 100)/100}</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
-                        <h3>Low </h3><h4>{quoteData?.l}</h4>
+                        <h3>EPS </h3><h4>{Math.round(financialMetrics?.epsTTM * 100) / 100}</h4>
                     </div>
                     <div className="StockAdditionalDataComponent">
-                        <h3>Market Cap </h3><h4>{formatMarketCap(financialMetrics?.marketCapitalization)}</h4>
-                    </div>
-                    <div className="StockAdditionalDataComponent">
-                        <h3>Div Yield </h3><h4>{Math.trunc(financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100}%</h4>
+                        <h3>PE </h3><h4>{Math.round(quoteData?.c / financialMetrics?.epsTTM * 100) / 100}</h4>
                     </div>
                 </div>
             </div>)
@@ -60,9 +55,9 @@ function StockAdditionalDataView(financialMetrics, quoteData) {
 
 function formatMarketCap(cap) {
     if (cap > 1000) {
-        return (Math.trunc(cap / 10) / 100).toString() + "B"
+        return (Math.round(cap / 10) / 100).toString() + "B"
     } else {
-        return (Math.trunc(cap * 100) / 100).toString() + "M"
+        return (Math.round(cap * 100) / 100).toString() + "M"
     }
 }
 
