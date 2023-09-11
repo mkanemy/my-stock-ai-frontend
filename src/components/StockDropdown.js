@@ -18,7 +18,7 @@ function StockDropdown() {
     useEffect(() => {
         let active = true;
 
-        if (response.length !== 0) {
+        if (response.toString().length !== 0) {
             return () => {
                 active = false;
             };

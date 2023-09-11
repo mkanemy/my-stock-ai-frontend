@@ -18,7 +18,7 @@ function NewsArticle(article) {
                     {article.title}
                 </Typography>
                 <Typography className="articleDescription">
-                    {article.description.length > MAX_ARTICLE_LENGTH ? article.description.substring(0,MAX_ARTICLE_LENGTH) + "..." : article.description}
+                    {article.description?.length > MAX_ARTICLE_LENGTH ? article.description.substring(0,MAX_ARTICLE_LENGTH) + "..." : article.description}
                 </Typography>
             </CardContent>
             <CardActions className="articleLink">

@@ -24,7 +24,7 @@ function StockQuoteInfo(quoteData) {
                 {stockChange}
             </div>
         )
-    } else {
+    } else if (quoteData) {
         stockQuoteDataView = (
             <div className="NoDataResponse">
                 <h2>No quote data available for {stock.stock}</h2>
