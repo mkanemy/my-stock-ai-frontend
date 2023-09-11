@@ -25,12 +25,16 @@ function StockCompanyDataView(stock) {
     const [summary, setSummary] = useState();
     const navigate = useNavigate()
 
+    let first = false;
+
     useEffect(() => {
         axios.get(process.env.REACT_APP_BACKEND_URL + 'stock/details', { params: { ticker: ticker } })
             .then(res => {
                 setCompanyData(res.data.companyData);
                 setFinancialMetrics(res.data.financialMetrics);
                 setQuoteData(res.data.quoteData);
+
+                getArticles(res.data)
             })
             .catch(error => {
                 // TODO - Error Handling
@@ -38,33 +42,50 @@ function StockCompanyDataView(stock) {
                 console.error(error);
             });
 
-        axios.get(process.env.REACT_APP_BACKEND_URL + 'stock/articles', { params: { ticker: ticker } })
+        function getArticles(data) {
+
+            axios.get(process.env.REACT_APP_BACKEND_URL + 'stock/articles', { params: { ticker: ticker } })
             .then(res => {
                 setNewsArticles(res.data.data);
                 setNewsUrls(res.data.urls);
-                
-                if (!summary) { 
-                    axios.post(process.env.REACT_APP_BACKEND_URL + 'ai/summary', 
-                        { 
-                            ticker: ticker,
-                            companyName: name,
-                            articles: res.data.urls })
-                        .then(res => {
-                            setSummary(res.data.choices[0].message.content)
-                        })
-                        .catch(error => {
-                            // TODO - Error Handling
-                            // setResponse("error");
-                            console.error(error);
-                        })
-                }
 
+                getSummary(res.data.urls, data);
             })
             .catch(error => {
                 // TODO - Error Handling
                 // setResponse("error");
                 console.error(error);
             });
+
+        }
+
+        function getSummary(urls, data) {
+            axios.post(process.env.REACT_APP_BACKEND_URL + 'ai/summary', 
+                { 
+                    ticker: ticker,
+                    companyName: name,
+                    articles: urls,
+                    quote: {
+                        "currentPrice": data.quoteData?.c,
+                        "open": data.quoteData?.o,
+                        "high": data.quoteData?.h,
+                        "low": data.quoteData?.l,
+                        "marketCap": formatMarketCap(data.financialMetrics?.marketCapitalization),
+                        "yield": (Math.round(data.financialMetrics?.dividendYieldIndicatedAnnual * 100) / 100) + "%",
+                        "beta": Math.trunc(data.financialMetrics?.beta * 100)/100,
+                        "eps": Math.round(data.financialMetrics?.epsTTM * 100) / 100,
+                        "pe": Math.round(data.quoteData?.c / data.financialMetrics?.epsTTM * 100) / 100
+                    }
+                    })
+                .then(res => {
+                    setSummary(res.data.choices[0].message.content)
+                })
+                .catch(error => {
+                    // TODO - Error Handling
+                    // setResponse("error");
+                    console.error(error);
+                })
+        }
     }, [])
 
     return (
@@ -81,7 +102,12 @@ function StockCompanyDataView(stock) {
             <StockAdditionalDataView financialMetrics={financialMetrics} quoteData={quoteData}/>
             <div className="summaryWrapper">
                 {summary ? 
-                (<div className="articleSummaryWrapper"><h2>Summary of Recent News:</h2><h5>{summary}</h5></div>) : 
+                (<div className="articleSummaryWrapper">
+                    <h2>Summary of Recent News:</h2>
+                    <h5>{summary.substr(0, summary.indexOf('---'))}</h5>
+                    <h2>Analysis of Stock - {getRecommendation(summary)}</h2>
+                    <h5>{summary.substr(summary.indexOf('---') + 4, summary.length).slice(0, -1)}</h5>
+                </div>) : 
                 (<div className="loadingAnimationWrapper"><h4>AI Analyzing</h4> <div className="animationPulse"><DotPulse size={50} color="white" /></div></div>)}
             </div>
             <div className="StockDataChart">
@@ -96,6 +122,31 @@ function StockCompanyDataView(stock) {
             </div>
         </div>
     );
+}
+
+function getRecommendation(summary) {
+    switch (summary.substr(summary.length - 1)) {
+        case '1':
+            return 'Strong Buy';
+        case '2':
+            return 'Soft Buy';
+        case '3':
+            return 'Hold';
+        case '4':
+            return 'Soft Sell';
+        case '5':
+            return 'Strong Sell';
+        default:
+            return 'N/A';
+    }
+}
+
+function formatMarketCap(cap) {
+    if (cap > 1000) {
+        return (Math.round(cap / 10) / 100).toString() + "B"
+    } else {
+        return (Math.round(cap * 100) / 100).toString() + "M"
+    }
 }
 
 export default StockCompanyDataView;
