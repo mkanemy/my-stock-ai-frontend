@@ -2,6 +2,7 @@ import '../styles/HomeStyle.css';
 import { React, useState, useEffect, Fragment } from 'react';
 import StockDropdown from '../components/StockDropdown';
 import HomeTitleComponent from '../components/HomeTitleComponent';
+import HomeCodeReference from '../components/HomeCodeReference';
 
 function HomeView() {
 
@@ -10,6 +11,7 @@ function HomeView() {
             {/* <HomeHeaderComponent /> */}
             <HomeTitleComponent />
             <StockDropdown />
+            <HomeCodeReference />
         </div>
     );
 }

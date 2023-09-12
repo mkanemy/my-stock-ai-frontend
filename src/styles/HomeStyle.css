@@ -1,6 +1,6 @@
 .App {
     background-color: #282c34;
-    min-height: 85vh;
+    min-height: 80vh;
     min-width: 100vw;
     align-items: center;
     justify-content: center;
@@ -12,9 +12,21 @@
     flex-direction: column;
     justify-content: flex-start;
 
-    padding-top: 15vh;
+    padding-top: 20vh;
 }
 
 .StockSelectForm {
     margin-top: 5vh;
+}
+
+.HomeCodeReference {
+    margin-top: auto;
+}
+
+.HomeCodeReference a {
+    color: #1976d2;
+}
+
+.HomeCodeReference h6 {
+    margin-bottom: 20px;
 }
